@@ -31,7 +31,8 @@ app.post('/', (req, res) => {
         .get(url)
         .then(processData(strategy, options))
         .then(formatData(format, options))
-        .then(res.send.bind(res));
+        .then(result => res.send(result))
+        .catch(err => res.send(err.message));
 });
 
 app.listen(config.port, config.host, () => {
