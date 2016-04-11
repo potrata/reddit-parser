@@ -1,4 +1,3 @@
-import { inspect } from 'util';
 import express from 'express';
 import bodyParser from 'body-parser';
 import request from 'request-promise';
@@ -36,6 +35,5 @@ app.post('/', (req, res) => {
 });
 
 app.listen(config.port, config.host, () => {
-   console.log(`Server listening at ${config.host}:${config.port}`);
+    console.log(`Server listening at ${config.host}:${config.port}`);
 });
-

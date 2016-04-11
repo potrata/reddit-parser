@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import axios from 'axios';
 
-export default class App extends Component {
+export default class App extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -10,7 +10,7 @@ export default class App extends Component {
             format: 'csv',
             options: {},
             result: '',
-            isFetching: false
+            isFetching: false,
         };
     }
 
@@ -36,7 +36,7 @@ export default class App extends Component {
                 this.setState({ result: result.data });
                 return result;
             }).catch(err => {
-                this.setState( {result: err });
+                this.setState({ result: err });
                 return err;
             }).then(() => this.setState({ isFetching: false }));
     }
@@ -82,8 +82,8 @@ export default class App extends Component {
                         disabled={this.state.isFetching}
                     />
                 </form><br/>
-                <textarea value={this.state.result} style={{width: '100%', height: '512px'}}/>
+                <textarea value={this.state.result} style={{ width: '100%', height: '512px' }}/>
             </div>
         );
     }
-};
+}

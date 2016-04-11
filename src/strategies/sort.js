@@ -20,4 +20,4 @@ export default function sort({ field, order = 'asc' }) {
     );
 
     return order === 'desc' ? R.pipe(sortFn, R.reverse) : sortFn;
-};
+}
