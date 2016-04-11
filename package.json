@@ -1,0 +1,51 @@
+{
+  "name": "reddit-parser",
+  "version": "0.0.1",
+  "description": "Sorts and/or groups data from reddit by given conditions",
+  "main": "./dist/index.js",
+  "scripts": {
+    "clean": "rm -rf ./dist/*",
+    "prebuild": "npm run clean",
+    "build": "./node_modules/.bin/babel --ignore='public/js' --source-maps --copy-files -d ./dist ./src",
+    "postbuild": "webpack",
+    "start": "npm run build && node .",
+    "test": "",
+    "debug": "./node_modules/.bin/babel-node --debug-brk ./",
+    "lint": "./node_modules/.bin/eslint ./src && eslint ./test",
+    "patch": "npm run build && npm version patch && git push origin --follow-tags && npm publish"
+  },
+  "repository": "",
+  "author": "Nikolay Chursin <nick.chursin@gmail.com>",
+  "dependencies": {
+    "axios": "^0.9.1",
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "ramda": "^0.20.1",
+    "react": "^15.0.1",
+    "react-dom": "^15.0.1",
+    "react-material": "^0.3.2",
+    "request-promise": "^2.0.1",
+    "webpack": "^1.12.14"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.x.x",
+    "babel-core": "^6.7.6",
+    "babel-eslint": "^6.0.0-beta.6",
+    "babel-loader": "^6.2.4",
+    "babel-plugin-transform-runtime": "^6.x.x",
+    "babel-preset-es2016-node5": "^1.x.x",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-0": "^6.x.x",
+    "eslint": "^2.4.0"
+  },
+  "babel": {
+    "presets": [
+      "es2016-node5",
+      "stage-0",
+      "react"
+    ],
+    "plugins": [
+      "transform-runtime"
+    ]
+  }
+}

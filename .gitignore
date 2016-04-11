@@ -1,0 +1,6 @@
+.directory
+*.log
+*.tgz
+/node_modules
+/dist/*
+!.gitkeep
