@@ -8,6 +8,9 @@ const foldItems = R.reduce((acc, item) => {
     };
 }, { count: 0, score: 0 });
 
+/**
+ * @returns {Function:: [a] -> [a]} Aggregating function
+ */
 export default function aggregate() {
     return R.pipe(
         R.map(R.pick(['id', 'score', 'domain'])),
