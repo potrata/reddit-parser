@@ -1,8 +1,9 @@
 import R from 'ramda';
 
 /**
- * @param {string} separator - CSV fields separator
- * @returns {Function:: [a] -> String} Format function
+ * @param {Object} options - provided options
+ * @param {string} options.separator - CSV field separator
+ * @returns {Function:: [a] -> string} Formatting function
  */
 export default function format({ separator = ',' }) {
     const wrapWithQuotes = str => `"${str}"`;

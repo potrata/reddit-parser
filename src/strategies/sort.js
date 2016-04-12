@@ -10,14 +10,14 @@ const stringifyDateField = (item) => {
  * @param {string} [order = asc|desc] - Sorting order
  * @returns {Function:: [a] -> [a]} Sorting function
  */
-export default function sort({ field, order = 'asc' }) {
+export default function sort({ sortField, sortOrder = 'asc' }) {
     const sortFn = R.pipe(
-        R.sortBy(R.prop(field)),
+        R.sortBy(R.prop(sortField)),
         R.map(R.pipe(
                 R.pick(['id', 'title', 'created_utc', 'score']),
                 stringifyDateField
         ))
     );
 
-    return order === 'desc' ? R.pipe(sortFn, R.reverse) : sortFn;
+    return sortOrder === 'desc' ? R.pipe(sortFn, R.reverse) : sortFn;
 }

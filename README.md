@@ -7,3 +7,7 @@
 ## Running
 
     $ npm start
+
+## Running Tests
+
+    $ npm test

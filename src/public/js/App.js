@@ -8,7 +8,12 @@ export default class App extends React.Component {
             url: 'https://www.reddit.com/r/javascript/.json',
             strategy: 'sort',
             format: 'csv',
-            options: {},
+            options: {
+                tableName: 'results',
+                separator: ';',
+                sortOrder: 'asc',
+                sortField: 'score',
+            },
             result: '',
             isFetching: false,
         };
@@ -24,6 +29,30 @@ export default class App extends React.Component {
 
     onFormatChange = (e) => {
         this.setState({ format: e.target.value });
+    }
+
+    onTableNameChange = (e) => {
+        this.setState({
+            options: { ...this.state.options, tableName: e.target.value }
+        });
+    }
+
+    onSeparatorChange = (e) => {
+        this.setState({
+            options: { ...this.state.options, separator: e.target.value }
+        });
+    }
+
+    onSortOrderChange = (e) => {
+        this.setState({
+            options: { ...this.state.options, sortOrder: e.target.value }
+        });
+    }
+
+    onSortFieldChange = (e) => {
+        this.setState({
+            options: { ...this.state.options, sortField: e.target.value }
+        });
     }
 
     onSubmit = (e) => {
@@ -42,6 +71,8 @@ export default class App extends React.Component {
     }
 
     render() {
+        const { url, strategy, format, options, isFetching, result } = this.state;
+
         return (
             <div id='app'>
                 <form onSubmit={this.onSubmit}>
@@ -49,14 +80,14 @@ export default class App extends React.Component {
                         <input
                             name='url'
                             type='text'
-                            value={this.state.url}
+                            value={url}
                             onChange={this.onUrlChange}
                             style={{ width: '256px' }}
                         />
                     </label><br/>
                     <label key='strategy'>Strategy:
                         <select
-                            value={this.state.strategy}
+                            value={strategy}
                             name='strategy'
                             onChange={this.onStrategyChange}
                             style={{ width: '256px' }}
@@ -65,9 +96,33 @@ export default class App extends React.Component {
                             <option value='aggregate'>Aggregate</option>
                         </select>
                     </label><br/>
+                    <div style={{ display: strategy === 'sort' ? 'block' : 'none' }}>
+                        <label key='order'>Order:
+                             <select
+                                value={options.sortOrder}
+                                name='order'
+                                onChange={this.onSortOrderChange}
+                                style={{ width: '256px' }}
+                             >
+                                <option value='asc'>Asc</option>
+                                <option value='desc'>Desc</option>
+                            </select>
+                        </label><br/>
+                        <label key='field'>Field:
+                             <select
+                                value={options.sortField}
+                                name='field'
+                                onChange={this.onSortFieldChange}
+                                style={{ width: '256px' }}
+                             >
+                                <option value='score'>score</option>
+                                <option value='created_utc'>created_utc</option>
+                            </select>
+                        </label><br/>
+                    </div>
                     <label key='format'>Format:
                         <select
-                            value={this.state.format}
+                            value={format}
                             name='format'
                             onChange={this.onFormatChange}
                             style={{ width: '256px' }}
@@ -76,13 +131,37 @@ export default class App extends React.Component {
                             <option value='sql'>SQL</option>
                         </select>
                     </label><br/>
+                    <hr/>
+                    <div style={{ display: format === 'csv' ? 'block' : 'none' }}>
+                        <label key='separator'>Separator:
+                            <input
+                                name='separator'
+                                type='text'
+                                maxLength='1'
+                                value={options.separator}
+                                onChange={this.onSeparatorChange}
+                                style={{ width: '256px' }}
+                            />
+                        </label><br/>
+                    </div>
+                    <div style={{ display: format === 'sql' ? 'block' : 'none' }}>
+                        <label key='tableName'>Table name:
+                            <input
+                                name='url'
+                                type='text'
+                                value={options.tableName}
+                                onChange={this.onTableNameChange}
+                                style={{ width: '256px' }}
+                            />
+                        </label><br/>
+                    </div>
                     <input
                         type='submit'
-                        value={this.state.isFetching ? 'Fetching...' : 'Submit'}
-                        disabled={this.state.isFetching}
+                        value={isFetching ? 'Fetching...' : 'Submit'}
+                        disabled={isFetching}
                     />
                 </form><br/>
-                <textarea value={this.state.result} style={{ width: '100%', height: '512px' }}/>
+                <textarea value={result} style={{ width: '100%', height: '512px' }}/>
             </div>
         );
     }

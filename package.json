@@ -7,9 +7,9 @@
     "clean": "rm -rf ./dist/*",
     "prebuild": "npm run clean && npm run lint",
     "build": "./node_modules/.bin/babel --ignore='public/js' --source-maps --copy-files -d ./dist ./src",
-    "postbuild": "webpack",
+    "postbuild": "npm test && webpack",
     "start": "npm run build && node .",
-    "test": "blue-tape ./dist/test/*.js | tap-spec",
+    "test": "blue-tape ./dist/test/**/*.js | tap-spec",
     "debug": "./node_modules/.bin/babel-node --debug-brk ./",
     "lint": "./node_modules/.bin/eslint ./src",
     "patch": "npm run build && npm version patch && git push origin --follow-tags && npm publish"
