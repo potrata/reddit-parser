@@ -128,11 +128,12 @@ export default class App extends React.Component {
                             style={{ width: '256px' }}
                         >
                             <option value='csv'>CSV</option>
+                            <option value='csvAsync'>CSV Async</option>
                             <option value='sql'>SQL</option>
                         </select>
                     </label><br/>
                     <hr/>
-                    <div style={{ display: format === 'csv' ? 'block' : 'none' }}>
+                    <div style={{ display: format !== 'sql' ? 'block' : 'none' }}>
                         <label key='separator'>Separator:
                             <input
                                 name='separator'
